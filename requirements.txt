@@ -1,0 +1,5 @@
+quart
+hypercorn
+telethon
+gspread
+oauth2client
