@@ -1,8 +1,8 @@
 from quart import Quart, render_template
 from telethon.sync import TelegramClient, utils
 from telethon.tl.types import InputPeerChannel
+from telethon.sessions import StringSession
 from datetime import datetime, timedelta
-import asyncio
 import time
 from telethon.tl.types import InputPeerEmpty, InputPeerChannel, InputPeerUser,InputMessagesFilterDocument, MessageMediaPhoto, MessageMediaDocument, MessageReactions
 import gspread
@@ -32,25 +32,18 @@ api = gspread.authorize(conta)
 planilha = api.open_by_key("1drW5e4xS54XvuULlR3hLdgQRdSahB4-VJKnq8rb4fJI")
 historico = planilha.worksheet("Historico")
 
+
 # Define o período de tempo
 agora = datetime.now()
 doze_horas = agora - timedelta(hours=12)
 
-# Função para conectar ao Telegram
-async def conectado():
-    try:
-        client = TelegramClient('session', api_id, api_hash)
-        await client.start(telefone)
-        await client.connect()
-
-        if not await client.is_user_authorized():
-            # Implemente o código para obter código de verificação ou senha
-            pass
-
-        return client
-    except Exception as e:
-        print("Erro durante a conexão com o Telegram:", e)
-        return None
+string = os.environ['string']
+async def conecta():
+    client = TelegramClient(StringSession(string), api_id, api_hash)
+    await client.start(telefone)
+    await client.connect()
+    return client
+    
 
 # Função que define o tipo de mídia que a mensagem contém
 def tipo_midia(message):
