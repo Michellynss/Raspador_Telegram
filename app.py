@@ -113,7 +113,7 @@ async def processar_grupos(client):
 # Rota para exibir os dados processados
 @app.route('/dados')
 async def dados():
-    async with TelegramClient('session', api_id, api_hash, timeout=10) as client:
+    async with TelegramClient(StringSession(string), api_id, api_hash, timeout=5) as client:
         dados_processados = await processar_grupos(client)
         return await render_template('telegram.html', dados=dados_processados)
 
@@ -151,12 +151,13 @@ async def get_top_messages(client):
 # Rota para visualizar as mensagens mais vistas
 @app.route('/maisvistas')
 async def mais_vistas():
-    async with TelegramClient('session', api_id, api_hash, timeout=10) as client:
+    async with TelegramClient(StringSession(string), api_id, api_hash, timeout=5) as client:
         mais_vistas_grupos = await get_top_messages(client)
         return await render_template('maisvistas.html', mais_vistas=mais_vistas_grupos)
 
 if __name__ == '__main__':
     app.run()
+
 
 
 
