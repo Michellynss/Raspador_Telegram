@@ -142,7 +142,7 @@ async def top_messages(client):
     for grupo in grupos:
         group_entity = await client.get_entity(grupo)
         group_input_peer = InputPeerChannel(group_entity.id, group_entity.access_hash)
-        await time.sleep(2)  
+        await asyncio.sleep(2)  
         messages = await client.get_messages(
             entity=group_input_peer,
             limit=50,
