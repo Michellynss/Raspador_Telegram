@@ -136,18 +136,18 @@ async def enviar_para_planilha(dados_processados_doze):
 # Função que processa as mensagens mais vistas das últimas seis horas
 async def top_messages(client):
 
+    mais_vistas_grupos = []
+
     for grupo in grupos:
         group_entity = await client.get_entity(grupo)
         group_input_peer = InputPeerChannel(group_entity.id, group_entity.access_hash)
-        time.sleep(2)
+        await time.sleep(2)  
         messages = await client.get_messages(
             entity=group_input_peer,
             limit=50,
-            offset_date=seis_horas,
+            offset_date=doze_horas,
             reverse=True)
         
-        mais_vistas_grupos = []
-
         for message in messages:
             nome_grupo = obter_grupo(group_entity)
             mensagem = obter_mensagem(message)
@@ -158,7 +158,6 @@ async def top_messages(client):
             if message.views is not None:
                 mais_vistas_grupos.append((nome_grupo, mensagem, midia_tipo, midia_link, data, visualizacoes))
 
-        mais_vistas_grupos.sort(key=lambda x: x[1] if x[1] is not None else 0, reverse=True)
-        top_5 = mais_vistas_grupos.extend(mais_vistas_grupos[:5])
-    
-    return top_5
+    mais_vistas_grupos.sort(key=lambda x: x[1] if x[1] is not None else 0, reverse=True)
+    top_mensagens = mais_vistas_grupos[:20] 
+    return top_mensagens
