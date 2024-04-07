@@ -138,7 +138,6 @@ async def planilha():
 
 # Função para mensagens mais vistas
 async def top_messages(client):
-    mais_vistas_grupos = []
 
     for grupo in grupos:
         group_entity = await client.get_entity(grupo)
@@ -149,6 +148,9 @@ async def top_messages(client):
             limit=50,
             offset_date=seis_horas,
             reverse=True)
+        
+        mais_vistas_grupos = []
+
         for message in messages:
             nome_grupo = obter_grupo(group_entity)
             mensagem = obter_mensagem(message)
@@ -161,9 +163,8 @@ async def top_messages(client):
 
         mais_vistas_grupos.sort(key=lambda x: x[1] if x[1] is not None else 0, reverse=True)
         top_5 = mais_vistas_grupos[:5]
-        print(top_5)
-
-    return mais_vistas_grupos
+    
+    return top_5
 
 
 # Rota para visualizar as mensagens mais vistas
