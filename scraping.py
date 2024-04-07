@@ -7,6 +7,7 @@ from telethon.tl.types import InputPeerChannel, MessageMediaPhoto, MessageMediaD
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import os
+import asyncio
 
 # Credenciais do Telegram
 api_id = os.environ['id']
@@ -85,7 +86,7 @@ async def processar_grupos(client):
     for grupo in grupos:
         group_entity = await client.get_entity(grupo)
         group_input_peer = InputPeerChannel(group_entity.id, group_entity.access_hash)
-        time.sleep(2)
+        await asyncio.sleep(2)
         messages = await client.get_messages(
             entity=group_input_peer,
             limit=50,
@@ -109,7 +110,7 @@ async def processar_grupos_doze(client):
     for grupo in grupos:
         group_entity = await client.get_entity(grupo)
         group_input_peer = InputPeerChannel(group_entity.id, group_entity.access_hash)
-        time.sleep(2)
+        await asyncio.sleep(2)
         messages = await client.get_messages(
             entity=group_input_peer,
             limit=50,
