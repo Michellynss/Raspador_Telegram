@@ -162,7 +162,7 @@ async def top_messages(client):
                 mais_vistas_grupos.append((nome_grupo, mensagem, midia_tipo, midia_link, data, visualizacoes))
 
         mais_vistas_grupos.sort(key=lambda x: x[1] if x[1] is not None else 0, reverse=True)
-        top_5 = mais_vistas_grupos[:5]
+        top_5 = mais_vistas_grupos.extend(mais_vistas_grupos[:5])
     
     return top_5
 
@@ -172,7 +172,8 @@ async def top_messages(client):
 async def mais_vistas():
     async with TelegramClient(StringSession(string), api_id, api_hash, timeout=5) as client:
         mais_vistas_grupos = await top_messages(client)
-        return await render_template('maisvistas.html', mais_vistas=mais_vistas_grupos)
+        for message in top_messages:
+            return await render_template('maisvistas.html', mais_vistas=mais_vistas_grupos)
 
 if __name__ == '__main__':
     app.run()
