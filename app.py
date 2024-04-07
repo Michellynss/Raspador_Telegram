@@ -133,11 +133,11 @@ async def planilha():
     async with TelegramClient(StringSession(string), api_id, api_hash, timeout=5) as client:
         dados_processados = await processar_grupos(client)
         await enviar_para_planilha(dados_processados)
-        return await 'Os dados foram enviados para a planilha'
+        return 'Os dados foram enviados para a planilha'
         
 
 # Função para mensagens mais vistas
-async def get_top_messages(client):
+async def top_messages(client):
     mais_vistas_grupos = []
 
     for grupo in grupos:
@@ -160,16 +160,17 @@ async def get_top_messages(client):
                 mais_vistas_grupos.append((nome_grupo, mensagem, midia_tipo, midia_link, data, visualizacoes))
 
         mais_vistas_grupos.sort(key=lambda x: x[1] if x[1] is not None else 0, reverse=True)
-        mais_vistas_grupos[:5]
-        print(mais_vistas_grupos)
+        top_5 = mais_vistas_grupos[:5]
+        print(top_5)
 
     return mais_vistas_grupos
+
 
 # Rota para visualizar as mensagens mais vistas
 @app.route('/maisvistas')
 async def mais_vistas():
     async with TelegramClient(StringSession(string), api_id, api_hash, timeout=5) as client:
-        mais_vistas_grupos = await get_top_messages(client)
+        mais_vistas_grupos = await top_messages(client)
         return await render_template('maisvistas.html', mais_vistas=mais_vistas_grupos)
 
 if __name__ == '__main__':
