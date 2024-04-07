@@ -34,8 +34,13 @@ historico = planilha.worksheet("Historico")
 
 
 # Define o período de tempo
-agora = datetime.now()
-doze_horas = agora - timedelta(hours=12)
+def subtrair_horas(n_horas):
+    agora = datetime.now()
+    resultado = agora - timedelta(hours=n_horas)
+    return resultado
+
+seis_horas = subtrair_horas(6)
+doze_horas = subtrair_horas(12)
 
 string = os.environ['string']
 async def conecta():
@@ -93,8 +98,8 @@ async def processar_grupos(client):
         time.sleep(2)
         messages = await client.get_messages(
             entity=group_input_peer,
-            limit=5,
-            offset_date=doze_horas,
+            limit=30,
+            offset_date=seis_horas,
             reverse=True)
 
         for message in messages:
@@ -105,17 +110,31 @@ async def processar_grupos(client):
             data =  obter_data(message)
             visualizacoes = obter_visualizacoes(message)         
             dados_processados.append((nome_grupo, mensagem, midia_tipo, midia_link, data, visualizacoes))
-            time.sleep(2)
-            historico.append_row([nome_grupo, midia_tipo, mensagem, midia_link, data, visualizacoes])
-
+ 
     return dados_processados
-    
+
+async def enviar_para_planilha(dados_processados):
+    for dado in dados_processados:
+        nome_grupo, mensagem, midia_tipo, midia_link, data, visualizacoes = dado
+        time.sleep(2)
+        historico.append_row([nome_grupo, midia_tipo, mensagem, midia_link, data, visualizacoes])
+
+
 # Rota para exibir os dados processados
 @app.route('/dados')
 async def dados():
     async with TelegramClient(StringSession(string), api_id, api_hash, timeout=5) as client:
         dados_processados = await processar_grupos(client)
         return await render_template('telegram.html', dados=dados_processados)
+
+# Rota para exibir os dados processados
+@app.route('/planilha')
+async def planilha():
+    async with TelegramClient(StringSession(string), api_id, api_hash, timeout=5) as client:
+        dados_processados = await processar_grupos(client)
+        await enviar_para_planilha(dados_processados)
+        return await 'Os dados foram enviados para a planilha'
+        
 
 # Função para mensagens mais vistas
 async def get_top_messages(client):
@@ -128,10 +147,8 @@ async def get_top_messages(client):
         messages = await client.get_messages(
             entity=group_input_peer,
             limit=10,
-            offset_date=doze_horas,
+            offset_date=seis_horas,
             reverse=True)
-
-    
         for message in messages:
             nome_grupo = obter_grupo(group_entity)
             mensagem = obter_mensagem(message)
