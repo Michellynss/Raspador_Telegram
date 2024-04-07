@@ -98,7 +98,7 @@ async def processar_grupos(client):
         time.sleep(2)
         messages = await client.get_messages(
             entity=group_input_peer,
-            limit=30,
+            limit=50,
             offset_date=seis_horas,
             reverse=True)
 
@@ -146,7 +146,7 @@ async def top_messages(client):
         time.sleep(2)
         messages = await client.get_messages(
             entity=group_input_peer,
-            limit=10,
+            limit=50,
             offset_date=seis_horas,
             reverse=True)
         for message in messages:
