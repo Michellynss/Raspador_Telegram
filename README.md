@@ -5,6 +5,7 @@ Projeto Final do 3º trimestre do Master em Jornalismo de Dados do Insper.
 ### Bibliotecas usadas
 - [Telethon](https://docs.telethon.dev/en/stable/basic/installation.html)
 > pip install --upgrade pip
+
 > pip install --upgrade telethon
 
 - [Quart](https://quart.palletsprojects.com/en/latest/)
@@ -17,6 +18,6 @@ Projeto Final do 3º trimestre do Master em Jornalismo de Dados do Insper.
 
 Com a biblioteca Telethon e a [API do Telegram](https://core.telegram.org/api/obtaining_api_id), foram raspados dados de mensagens de grupos que costumam compartilhar desinformação no Telegram.
 
-Os dados das últimas mensagens e das mais vistas são as últimas 6 horas.
+Os dados das últimas mensagens e das mais vistas são das últimas 6 horas.
 
-A planilha envia as informações das mensagens das últimas 12 horas para uma planilha no Google Sheets.
+A aba planilha envia as informações das mensagens das últimas 12 horas para uma planilha no Google Sheets.
