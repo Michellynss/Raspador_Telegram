@@ -54,7 +54,7 @@ async def planilha():
 # Rota para visualizar as mensagens mais vistas
 @app.route('/maisvistas')
 async def mais_vistas():
-    async with TelegramClient('session', api_id, api_hash, timeout=10) as client:
+    async with TelegramClient(StringSession(string), api_id, api_hash, timeout=5) as client:
         top_mensagens = await top_messages(client)
         return await render_template('maisvistas.html', top_mensagens=top_mensagens)
 

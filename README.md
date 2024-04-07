@@ -20,4 +20,4 @@ Com a biblioteca Telethon e a [API do Telegram](https://core.telegram.org/api/ob
 
 Os dados das últimas mensagens e das mais vistas são das últimas 6 horas.
 
-A aba planilha envia as informações das mensagens das últimas 12 horas para uma planilha no Google Sheets.
+A aba planilha envia as informações das mensagens das últimas 12 horas para o Google Sheets.
