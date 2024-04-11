@@ -2,7 +2,7 @@
 Projeto Final do 3º trimestre do Master em Jornalismo de Dados do Insper.
 
 
-### Bibliotecas usadas
+### Istalação
 - [Telethon](https://docs.telethon.dev/en/stable/basic/installation.html)
 > pip install --upgrade pip
 
