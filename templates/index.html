@@ -1,71 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        nav {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        nav a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-right: 10px;
-            text-decoration: none;
-            color: #333;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        nav a:hover {
-            background-color: #ddd;
-        }
-    </style>
+    <link href="static/css/style.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
     <div class="container">
         <h1>Raspador do Telegram</h1>
         <h3>Monitoramento de grupos que costumam compartilhar desinformação. </h3>
-        <p> As abas "Últimas" e "Mais vistas" mostram mensagens das últimas 6 horas. A aba "Planilha" envia os dados das últimas 12 horas para o Google Sheets.</p>
         <nav>
             <a href="/dados"> Últimas </a>
             <a href="/maisvistas"> Mais vistas</a>
             <a href="/planilha"> Planilha </a>
         </nav>
+        <p> *A aba "Planilha" envia os dados das últimas 12 horas para o <a href="https://docs.google.com/spreadsheets/d/1drW5e4xS54XvuULlR3hLdgQRdSahB4-VJKnq8rb4fJI/edit?usp=sharing" target="_blank"> Google Sheets</a>.</p>
     </div>
 </body>
-
 </html>
