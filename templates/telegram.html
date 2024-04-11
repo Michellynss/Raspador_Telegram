@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Últimas mensagens</title>
+    <title>Mais vistas</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="static/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <nav>
         <ul>
-            <a href="/">Home</a>
-            <a href="/maisvistas">Mais vistas</a>
-            <a href="/planilha">Planilha</a>
+           <a href="/">Home</a>
+           <a href="/dados">Últimas</a>
+           <a href="/planilha">Planilha</a>
         </ul>
     </nav>
     <div class="container">
-        <h2>Todas as mensagens das últimas 6 horas</h2>
+        <h2>Mensagens mais vistas nas últimas 6 horas</h2>
         <table>
             <thead>
                 <tr>
@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for dado in dados %}
+                {% for dado in top_mensagens %}
                 <tr>
                     <td>{{ dado[0] }}</td>
                     <td>{{ dado[1] }}</td>
