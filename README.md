@@ -14,6 +14,7 @@ Os dados das últimas mensagens e das mais vistas são das últimas 6 horas. A a
 - [Quart](https://quart.palletsprojects.com/en/latest/)
 > pip install quart
 
+- [async](https://docs.python.org/3/library/asyncio.html)
 - [datetime](https://docs.python.org/pt-br/3/library/datetime.html)
 - [time](https://docs.python.org/pt-br/3.9/library/time.html)
 - [gspread](https://docs.gspread.org/en/v6.0.0/)
